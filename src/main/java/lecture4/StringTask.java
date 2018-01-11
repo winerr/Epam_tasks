@@ -25,19 +25,40 @@ public class StringTask {
     public String rightTab(){
         StringBuilder resultText = new StringBuilder();
         char[] textArray = text.toCharArray();
-        int index = 50;
-        while (index < textArray.length){
-            //таблица acii
-            if(textArray[index] == ' ' || textArray[index] == '\n' || textArray[index] == ',' || textArray[index] == '.'){
-                resultText.append(new String(textArray).subSequence(index-50, index+1));
-            }else{
-
+        char [][] exitText = new char[textArray.length/50+10][51];
+        int index = 0;
+        int row = 0, column;
+        for (int i=50; i<textArray.length; i+=50){
+            while (true) {
+                if (textArray[i] == ' ' || textArray[i] == '\n') {
+                    column = 50-(i-index);
+                    for (int l=0; l<column; l++)
+                        exitText[row][l] = ' ';
+                    for ( ; index < i; index++) {
+                        if(textArray[index] == '\n'){
+                            index++;
+                            i = index;
+                            break;
+                        }
+                        exitText[row][column] = textArray[index];
+                        column++;
+                    }
+                    exitText[row][column] = '\n';
+                    row++;
+                    break;
+                } else {
+                    i--;
+                }
             }
+
+        }
+
+        for (char[] c: exitText){
+            resultText.append(c);
         }
 
 
-
-        return null;
+        return resultText.toString();
     }
 
 }
