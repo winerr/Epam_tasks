@@ -25,37 +25,51 @@ public class StringTask {
     public String rightTab(){
         StringBuilder resultText = new StringBuilder();
         char[] textArray = text.toCharArray();
-        char [][] exitText = new char[textArray.length/51+5][51];
+        char [] exitText;
         int index = 0;
-        int row = 0, column;
+        int position, sizeOfRow = 50;
         int startPosition;
-        for (int i=50; i<textArray.length; i+=50){
+        boolean interrupt = false;
+        for (int i=50; i<textArray.length; i+=sizeOfRow){
             while (true) {
-                if (textArray[i] == ' ' || textArray[i] == '\n') {
-                    column = 50-(i-index);
-                    startPosition = column;
-                    for (int l=0; l<column; l++)
-                        exitText[row][l] = ' ';
-                    for ( ; index < i; index++) {
-                        if(textArray[index] == '\n'){
-                            //переробити! має переставляти з кінця
-                            int size = 50;
-                            for(int j=column-1; j>=startPosition; j--){
-                                //int k = 50 - column + j;
-                                exitText[row][size] = exitText[row][j];
-                                exitText[row][j] = ' ';
-                                size--;
-                            }
+                if (textArray[i] == ' ' || textArray[i] == '\n' || textArray[i] == '.' || textArray[i] == ',' || textArray[i] == '!' || textArray[i] == '?') {
 
+                    exitText = new char[sizeOfRow+1];
+                    //Заповнюємо усю стрічку пробілами
+                    for (int l=0; l<sizeOfRow+1; l++)
+                        exitText[l] = ' ';
+
+                    position = sizeOfRow-(i-index);
+                    startPosition = position;
+                    //Переносимо вміст вчіжного тексту у відформатовану стрічку
+                    for ( ; index < i; index++) {
+                        //Якщо знайшли символ '\n' в середині стрічки то переносимо весь вміст у кінець
+                        if(textArray[index] == '\n'){
+                            int startElement = sizeOfRow-1;
+                            for(int j=position-1; j>=startPosition; j--){
+                                exitText[startElement] = exitText[j];
+                                exitText[j] = ' ';
+                                startElement--;
+                            }
+                            exitText[sizeOfRow] = '\n';
                             index++;
                             i = index;
+                            interrupt = true;
                             break;
                         }
-                        exitText[row][column] = textArray[index];
-                        column++;
-                    }                                                                                                                                                                                                                   
-                    exitText[row][column] = '\n';
-                    row++;
+
+                        exitText[position] = textArray[index];
+                        position++;
+
+                    }
+                    //Якщо ми не зустріли символ переносу рядка раніше то додаємо його в кінець
+                    if(!interrupt)
+                        exitText[position] = '\n';
+                    else
+                        interrupt = false;
+
+                    //Додаємо отриманий масив символів до кінцевого тексту
+                    resultText.append(exitText);
                     break;
                 } else {
                     i--;
@@ -63,12 +77,6 @@ public class StringTask {
             }
 
         }
-
-        for (char[] c: exitText){
-            resultText.append(c);
-        }
-
-
         return resultText.toString();
     }
 
