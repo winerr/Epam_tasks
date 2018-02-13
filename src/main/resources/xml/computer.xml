@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="computerXSTL.xsl"?>
+<devices xmlns="devices"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:shemaLocation="computerXSD.xsd" xsi:schemaLocation="devices ">
+    <device>
+        <name>ASUS Z-170A</name>
+        <origin>China</origin>
+        <price>200</price>
+        <type>
+            <peripheral>no</peripheral>
+            <energyConsumption>50</energyConsumption>
+            <cooler>no</cooler>
+            <ports>
+                <port>LGA1151</port>
+                <port>3 x PCIe 3.0</port>
+                <port>SATA</port>
+                <port>2 x USB 3.0</port>
+                <port>2 x USB 2.0</port>
+            </ports>
+        </type>
+        <critical>yes</critical>
+    </device>
+    <device>
+        <name>ASUS nVidia gtx1070</name>
+        <origin>China</origin>
+        <price>900</price>
+        <type>
+            <peripheral>no</peripheral>
+            <energyConsumption>150</energyConsumption>
+            <cooler>yes</cooler>
+            <ports>
+                <port>DVI</port>
+                <port>HDMI</port>
+                <port>Display port</port>
+                <port>PCIe 3.0</port>
+            </ports>
+        </type>
+        <critical>yes</critical>
+    </device>
+    <device>
+        <name>Intel i5-6600k</name>
+        <origin>China</origin>
+        <price>250</price>
+        <type>
+            <peripheral>no</peripheral>
+            <energyConsumption>100</energyConsumption>
+            <cooler>no</cooler>
+            <ports>
+                <port>LGA1151</port>
+            </ports>
+        </type>
+        <critical>yes</critical>
+    </device>
+</devices>

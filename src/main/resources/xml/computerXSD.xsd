@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="devices">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="device" type="deviceInfo" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="deviceInfo">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="origin" type="xs:string"/>
+            <xs:element name="price" type="xs:int"/>
+            <xs:element name="type">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="peripheral" type="xs:boolean"/>
+                        <xs:element name="energyConsumption" type="xs:int"/>
+                        <xs:element name="cooler" type="xs:boolean"/>
+                        <xs:element name="ports">
+                            <xs:complexType>
+                                <xs:choice maxOccurs="unbounded">
+                                    <xs:element name="port" type="xs:string"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="critical" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
